@@ -19,7 +19,4 @@ isValidPoints points =
 
 main = do
     (points:_) <- getArgs
-    isValid <- return $ isValidPoints $ read points
-    if isValid
-        then print "Valid Score"
-        else print "Invalid Score"
+    print (if isValidPoints $ read points then "Valid Score" else  "Invalid Score")

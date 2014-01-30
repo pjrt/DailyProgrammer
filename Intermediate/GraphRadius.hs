@@ -18,10 +18,10 @@ main = do
         graph = buildGraph (read size) matrix
         allNodes = map fst graph
         radius = minimum $ map (findEcc graph allNodes) allNodes
-    putStrLn $ show radius
+    print radius
 
 buildMatrix :: String -> Matrix
-buildMatrix = map (map read) . map words . lines
+buildMatrix = map (map read . words) . lines
 
 buildGraph :: Int -> Matrix -> Graph
 buildGraph size = zip [0..] . map go

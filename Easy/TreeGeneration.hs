@@ -10,13 +10,13 @@ main = do
             if even n || n < 3
             then error "n must be odd AND larger than 3"
             else do
-                tree <- return $ constructTree n baseC leafC
+                let tree = constructTree n baseC leafC
                 mapM_ putStrLn $ reverse tree
 
         _                 -> error "No enough arguments given"
 
 constructTree :: Int -> Char -> Char -> [[Char]]
-constructTree n bC lC = padTree n $ (replicate 3 bC):(mkLine n lC)
+constructTree n bC lC = padTree n $ replicate 3 bC : mkLine n lC
     where mkLine :: Int -> Char -> [[Char]]
           mkLine 1 l = [[l]]
           mkLine n' l = replicate n' l : mkLine (n' - 2) l
@@ -26,5 +26,5 @@ padTree _ [] = []
 padTree maxSize tree = map stretch tree
     where stretch :: [Char] -> [Char]
           stretch line =
-              let diff = (maxSize - (length line)) `div` 2
+              let diff = maxSize - length line `div` 2
               in  replicate diff ' ' ++ line
